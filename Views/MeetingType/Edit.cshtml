@@ -1,0 +1,64 @@
+@model MOM.Models.MeetingTypeModel
+
+@{
+    ViewData["Title"] = "Edit Meeting Type";
+}
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Edit Meeting Type</h1>
+            <p class="page-subtitle">Update meeting type information</p>
+        </div>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back to Meeting Types
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Meeting Type Information</h2>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input asp-for="MeetingTypeID" type="hidden" />
+
+            <div class="form-group">
+                <label asp-for="MeetingTypeName" class="form-label">
+                    <i class="bi bi-tags me-1"></i>
+                    Meeting Type Name
+                </label>
+                <input asp-for="MeetingTypeName" class="form-control" 
+                       placeholder="Enter meeting type name..." required />
+                <span asp-validation-for="MeetingTypeName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Remarks" class="form-label">
+                    <i class="bi bi-card-text me-1"></i>
+                    Remarks <small class="text-muted">(Optional)</small>
+                </label>
+                <textarea asp-for="Remarks" class="form-control" rows="3"
+                          placeholder="Enter any additional notes or remarks..."></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-md mt-xl">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i>
+                    Update Meeting Type
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i>
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,106 @@
+@model MOM.Models.StaffModel
+
+@{
+    ViewData["Title"] = "Edit Staff Member";
+}
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Edit Staff Member</h1>
+            <p class="page-subtitle">Update staff member information</p>
+        </div>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back to Staff
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Staff Information</h2>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input asp-for="StaffID" type="hidden" />
+            <input asp-for="Created" type="hidden" />
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="StaffName" class="form-label">
+                            <i class="bi bi-person me-1"></i>
+                            Staff Name
+                        </label>
+                        <input asp-for="StaffName" class="form-control" 
+                               placeholder="Enter full name..." required />
+                        <span asp-validation-for="StaffName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DepartmentID" class="form-label">
+                            <i class="bi bi-diagram-3 me-1"></i>
+                            Department
+                        </label>
+                        <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.Departments" required>
+                            <option value="">Select department...</option>
+                        </select>
+                        <span asp-validation-for="DepartmentID" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="form-label">
+                            <i class="bi bi-envelope me-1"></i>
+                            Email Address
+                        </label>
+                        <input asp-for="EmailAddress" type="email" class="form-control" 
+                               placeholder="Enter email address..." required />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MobileNo" class="form-label">
+                            <i class="bi bi-phone me-1"></i>
+                            Mobile Number
+                        </label>
+                        <input asp-for="MobileNo" class="form-control" 
+                               placeholder="Enter mobile number..." required />
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Remarks" class="form-label">
+                    <i class="bi bi-card-text me-1"></i>
+                    Remarks <small class="text-muted">(Optional)</small>
+                </label>
+                <textarea asp-for="Remarks" class="form-control" rows="3" 
+                          placeholder="Enter any additional notes or remarks..."></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-md mt-xl">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i>
+                    Update Staff Member
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i>
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

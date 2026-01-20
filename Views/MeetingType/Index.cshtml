@@ -1,0 +1,106 @@
+﻿@model IEnumerable<MOM.Models.MeetingTypeModel>
+
+@{
+    ViewData["Title"] = "Meeting Types";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade-in" role="alert">
+        <i class="bi bi-check-circle me-2"></i>
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert">
+            <i class="bi bi-x"></i>
+        </button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade-in" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert">
+            <i class="bi bi-x"></i>
+        </button>
+    </div>
+}
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Meeting Types</h1>
+            <p class="page-subtitle">Manage different types of meetings</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i>
+            Add Meeting Type
+        </a>
+    </div>
+</div>
+
+<div class="table-container">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="80">#</th>
+                    <th>Meeting Type Name</th>
+                    <th>Remarks</th>
+                    <th width="120">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 1;
+                }
+                @foreach (var meetingType in Model)
+                {
+                    <tr>
+                        <td>
+                            <span class="text-muted">@index</span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-sm">
+                                <i class="bi bi-tags text-primary"></i>
+                                <span class="fw-medium">@meetingType.MeetingTypeName</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="text-muted">@meetingType.Remarks</span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a asp-action="Edit" asp-route-id="@meetingType.MeetingTypeID" 
+                                   class="btn btn-sm btn-secondary" title="Edit Meeting Type">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@meetingType.MeetingTypeID" method="post" style="display: inline;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Delete Meeting Type"
+                                            onclick="return confirm('Are you sure you want to delete this meeting type? This will fail if there are meetings using this type.')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="bi bi-tags"></i>
+            <h3>No meeting types found</h3>
+            <p class="text-muted">Start by creating your first meeting type</p>
+            <a asp-action="Create" class="btn btn-primary mt-lg">
+                <i class="bi bi-plus-circle"></i>
+                Add Meeting Type
+            </a>
+        </div>
+    }
+</div>

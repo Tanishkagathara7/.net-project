@@ -1,0 +1,43 @@
+﻿@model MOM.Models.MeetingMemberModel
+
+@{
+    ViewData["Title"] = "Add Meeting Member";
+}
+
+<h3 class="mb-3">Add Meeting Member</h3>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Meeting</label>
+        <select asp-for="MeetingID" class="form-select" asp-items="ViewBag.MeetingList">
+            <option value="">-- Select Meeting --</option>
+        </select>
+        <span asp-validation-for="MeetingID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Staff Member</label>
+        <select asp-for="StaffID" class="form-select" asp-items="ViewBag.StaffList">
+            <option value="">-- Select Staff --</option>
+        </select>
+        <span asp-validation-for="StaffID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Is Present</label>
+        <select asp-for="IsPresent" class="form-select">
+            <option value="true">Present</option>
+            <option value="false">Absent</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Remarks</label>
+        <textarea asp-for="Remarks" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form>

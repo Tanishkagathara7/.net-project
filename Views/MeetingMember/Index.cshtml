@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MOM.Models.MeetingMemberVM>
+
+@{
+    ViewData["Title"] = "Meeting Members";
+}
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Meeting Members</h1>
+            <p class="page-subtitle">Manage meeting attendance and participation</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-person-plus"></i>
+            Add Member
+        </a>
+    </div>
+</div>
+
+<div class="table-container">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Meeting</th>
+                    <th>Staff Member</th>
+                    <th>Attendance</th>
+                    <th>Remarks</th>
+                    <th width="120">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var member in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-sm">
+                                <i class="bi bi-calendar-event text-primary"></i>
+                                <span class="fw-medium">@member.MeetingTitle</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-sm">
+                                <i class="bi bi-person-circle text-muted"></i>
+                                <span>@member.StaffName</span>
+                            </div>
+                        </td>
+                        <td>
+                            @if (member.IsPresent)
+                            {
+                                <span class="badge badge-success">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    Present
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">
+                                    <i class="bi bi-x-circle me-1"></i>
+                                    Absent
+                                </span>
+                            }
+                        </td>
+                        <td>
+                            <span class="text-muted">@member.Remarks</span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a asp-action="Delete" asp-route-id="@member.MeetingMemberID" 
+                                   class="btn btn-sm btn-danger" title="Remove Member"
+                                   onclick="return confirm('Are you sure you want to remove this member from the meeting?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="bi bi-person-check"></i>
+            <h3>No meeting members found</h3>
+            <p class="text-muted">Start by adding members to meetings</p>
+            <a asp-action="Create" class="btn btn-primary mt-lg">
+                <i class="bi bi-person-plus"></i>
+                Add Member
+            </a>
+        </div>
+    }
+</div>

@@ -1,0 +1,116 @@
+﻿@model MOM.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Overview of your meeting management system</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-lg">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-md">
+                    <i class="bi bi-tags text-primary" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="mb-sm">@Model.TotalMeetingTypes</h3>
+                <p class="text-muted mb-0">Meeting Types</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-lg">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-md">
+                    <i class="bi bi-diagram-3 text-success" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="mb-sm">@Model.TotalDepartments</h3>
+                <p class="text-muted mb-0">Departments</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-lg">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-md">
+                    <i class="bi bi-people text-info" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="mb-sm">@Model.TotalStaff</h3>
+                <p class="text-muted mb-0">Staff Members</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-lg">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-md">
+                    <i class="bi bi-geo-alt text-warning" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="mb-sm">@Model.TotalVenues</h3>
+                <p class="text-muted mb-0">Meeting Venues</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-lg">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-md">
+                    <i class="bi bi-calendar-event text-primary" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="mb-sm">@Model.TotalMeetings</h3>
+                <p class="text-muted mb-0">Total Meetings</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-lg">
+        <div class="card" style="border-color: var(--danger);">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-md">
+                    <i class="bi bi-calendar-x text-danger" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="mb-sm text-danger">@Model.CancelledMeetings</h3>
+                <p class="text-muted mb-0">Cancelled Meetings</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-xl">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Quick Actions</h2>
+            </div>
+            <div class="card-body">
+                <div class="d-flex gap-md flex-wrap">
+                    <a asp-controller="Meetings" asp-action="Create" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Schedule Meeting
+                    </a>
+                    <a asp-controller="Staff" asp-action="Create" class="btn btn-secondary">
+                        <i class="bi bi-person-plus"></i>
+                        Add Staff Member
+                    </a>
+                    <a asp-controller="Department" asp-action="Create" class="btn btn-secondary">
+                        <i class="bi bi-plus-circle"></i>
+                        Add Department
+                    </a>
+                    <a asp-controller="MeetingVenue" asp-action="Create" class="btn btn-secondary">
+                        <i class="bi bi-geo-alt"></i>
+                        Add Venue
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

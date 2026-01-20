@@ -1,0 +1,116 @@
+@model MOM.Models.MeetingsModel
+
+@{
+    ViewData["Title"] = "Edit Meeting";
+}
+
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Edit Meeting</h1>
+            <p class="page-subtitle">Update meeting details and information</p>
+        </div>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back to Meetings
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Meeting Details</h2>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <input asp-for="MeetingID" type="hidden" />
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MeetingDate" class="form-label">
+                            <i class="bi bi-calendar3 me-1"></i>
+                            Meeting Date & Time
+                        </label>
+                        <input asp-for="MeetingDate" type="datetime-local" class="form-control" required />
+                        <span asp-validation-for="MeetingDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MeetingTypeID" class="form-label">
+                            <i class="bi bi-tags me-1"></i>
+                            Meeting Type
+                        </label>
+                        <select asp-for="MeetingTypeID" class="form-control" asp-items="ViewBag.MeetingTypes" required>
+                            <option value="">Select meeting type...</option>
+                        </select>
+                        <span asp-validation-for="MeetingTypeID" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MeetingVenueID" class="form-label">
+                            <i class="bi bi-geo-alt me-1"></i>
+                            Meeting Venue
+                        </label>
+                        <select asp-for="MeetingVenueID" class="form-control" asp-items="ViewBag.MeetingVenues" required>
+                            <option value="">Select venue...</option>
+                        </select>
+                        <span asp-validation-for="MeetingVenueID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DepartmentID" class="form-label">
+                            <i class="bi bi-diagram-3 me-1"></i>
+                            Department
+                        </label>
+                        <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.Departments" required>
+                            <option value="">Select department...</option>
+                        </select>
+                        <span asp-validation-for="DepartmentID" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MeetingDescription" class="form-label">
+                    <i class="bi bi-card-text me-1"></i>
+                    Meeting Description
+                </label>
+                <textarea asp-for="MeetingDescription" class="form-control" rows="4" 
+                          placeholder="Describe the purpose and agenda of the meeting..."></textarea>
+                <span asp-validation-for="MeetingDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DocumentPath" class="form-label">
+                    <i class="bi bi-file-earmark me-1"></i>
+                    Document Path <small class="text-muted">(Optional)</small>
+                </label>
+                <input asp-for="DocumentPath" type="text" class="form-control" 
+                       placeholder="Enter document path or URL..." />
+                <span asp-validation-for="DocumentPath" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-md mt-xl">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i>
+                    Update Meeting
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i>
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

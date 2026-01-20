@@ -1,0 +1,33 @@
+﻿@* jQuery Validation Scripts *@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+// Custom validation styling for our minimal design
+$(document).ready(function() {
+    // Override default validation error styling
+    $.validator.setDefaults({
+        errorClass: 'is-invalid',
+        validClass: 'is-valid',
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            if (element.prop('type') === 'checkbox') {
+                error.insertAfter(element.next('label'));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass(errorClass).addClass(validClass);
+        }
+    });
+
+    // Initialize unobtrusive validation
+    $.validator.unobtrusive.parse(document);
+});
+</script>
